@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Lab3_palazova</string>
+    <string name="fab_add_description">Додати новий контакт</string>
+</resources>
