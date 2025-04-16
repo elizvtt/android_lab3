@@ -23,7 +23,7 @@ class ContactAdapter(private val contactList: MutableList<Contact>, private val 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        // При довгому натисканні видаляємо елемент списку
+        // При натисканні на хрестик видаляємо елемент списку
         return ContactViewHolder(binding) { position ->
             removeContact(position)
         }
@@ -37,7 +37,7 @@ class ContactAdapter(private val contactList: MutableList<Contact>, private val 
     override fun getItemCount(): Int = contactList.size
 
     // ViewHolder для одного елемента списку
-    class ContactViewHolder(private val binding: ListItemBinding, private val onLongClick: (Int) -> Unit) : RecyclerView.ViewHolder(binding.root) {
+    class ContactViewHolder(private val binding: ListItemBinding, private val onDeleteClick: (Int) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(contact: Contact) {
             binding.contactName.text = contact.name
             binding.contactEmail.text = contact.email
@@ -49,11 +49,10 @@ class ContactAdapter(private val contactList: MutableList<Contact>, private val 
                 binding.contactPhoto.loadImage(R.drawable.img_android)
             }
 
-            // При довгому натисканні видаляємо елемент списку
-            binding.root.setOnLongClickListener {
-                onLongClick(adapterPosition)
+            // При натисканні на хрестик видаляємо елемент списку
+            binding.imageButton.setOnClickListener {
+                onDeleteClick(adapterPosition)
                 Toast.makeText(binding.root.context, "Контакт видалено", Toast.LENGTH_SHORT).show()
-                true
             }
         }
     }
