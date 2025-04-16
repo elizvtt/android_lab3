@@ -9,10 +9,33 @@
 7. Якщо всі контакти видалені, користувачеві знову показується напис про те, що список контактів порожній.
 
 #### Виконання роботи:
-У файлі activity_main.xml створюємо інтерфес головного вікна програми. Додаємо назву та кнопку FloatingActionButton для додавання контактів. Також додаємо картинку та текст які відображаються поки список пустий
+У файлі activity_main.xml створюємо інтерфес головного вікна програми. Додаємо назву та кнопку FloatingActionButton для додавання контактів. Також додаємо картинку та текст, які відображаються поки список пустий. Додаємо RecyclerView для елементів списку
 
+![image](https://github.com/user-attachments/assets/5d93b38a-7e8d-4706-b978-1fc99fce6276)
 
+Створюємо файл activity_second.xml для вікна заповнення контакта. Додаємо imageView, три поля для заповнення ім'я, пошти та номеру телефону і три кнопки: "Додати", "Зробити фото" та "Відмінити". Для полей додаємо іконки та атрибут `style="@style/Widget.Material3.TextInputLayout.OutlinedBox"` для більш гарного відображення.
 
+![image](https://github.com/user-attachments/assets/51f9c144-cbec-44e5-8bb7-0e3e72f2e060)
 
+Створюємо файл list_item.xml для вигляду одного елементу списку. Використовуємо LinearLayout. Додаємо круглу картинку-аватарку за допомогою бібліотеки [AvatarView](https://github.com/GetStream/avatarview-android?tab=readme-ov-file). Також додємо текстові елементи та ImageButton для видалення контактів.
 
-бібліотека AvatarView: https://github.com/GetStream/avatarview-android?tab=readme-ov-file
+![image](https://github.com/user-attachments/assets/54486bcb-84ff-4308-895d-4dd4fc0c00b2)
+
+Далі MainActivity.kt - головна активність програми. Головне вікно додатку, яке відповідає за відображення списку контактів та відкриття вікна для додавання нового контакту. Ініціалізується адаптер ContactAdapter, передається список контактів. За допомогою ActivityResultLauncher отримується результат із SecondActivity та додається новий контакт. Метод updateUI() ховає або показує порожній стан у залежності від наявності контактів.
+
+Створюємо файл SecondActivity.kt - вікно створення нового контакту. Ця активність відкривається з головного вікна для введення інформації про новий контакт. За допомогою контрактів створений контакт передається у MainActiity.
+
+Також створюємо Contact.kt — клас-модель контакту. Простий дата клас, який описує структуру одного конакту та використовується для зберігання введених користувачем даних та пердачі між активностями.
+
+І створюємо файл ContactAdapter.kt — адаптер для списку контактів. Адаптер для RecyclerView, який відображає всі контакти в списку та забезпечує їх взаємодію. Окрім виводу ім'я, пошти, телефону та аватарки надає можливість за допомогою removeContact(position) видаляти контакт при натисканні на imageButton.
+
+**В результаті отримано таку програму:**
+
+![image](https://github.com/user-attachments/assets/d5e095f6-2d0e-48cb-b421-bdb9ee8dd59a)
+![image](https://github.com/user-attachments/assets/2a9e33f5-4f55-4d7b-9129-9e35dfd6f814)
+![image](https://github.com/user-attachments/assets/e32ffbca-ae24-4a3f-84f0-d9efef407249)
+![image](https://github.com/user-attachments/assets/459ec5e5-d507-464d-a433-4aee3899fb5e)
+![image](https://github.com/user-attachments/assets/4a0f715f-fe7b-476f-ba68-f79d2e6cd277)
+![image](https://github.com/user-attachments/assets/eb7af118-babe-4b64-8c0c-e679b4fd6b0b)
+![image](https://github.com/user-attachments/assets/d6636009-d069-4ec3-9b51-83a71f9ebf6f)
+![image](https://github.com/user-attachments/assets/2ae19e0b-0988-432d-a019-864f8059ddfe)
